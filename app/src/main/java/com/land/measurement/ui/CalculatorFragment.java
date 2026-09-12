@@ -10,8 +10,9 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,7 +23,6 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
-import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.land.measurement.R;
@@ -37,11 +37,9 @@ import java.util.Locale;
 public class CalculatorFragment extends Fragment {
 
     private NestedScrollView scrollViewCalculator;
-    private ChipGroup chipGroupStandard;
-    private ChipGroup chipGroupUnit;
-    private RadioGroup rgCalculationMode;
-    private RadioButton rbModeEqual;
-    private RadioButton rbModeHeron;
+    private Spinner spinnerCalculationMode;
+    private Spinner spinnerMarlaStandard;
+    private Spinner spinnerInputUnit;
 
     private TextInputLayout tilSideA, tilSideB, tilSideC, tilSideD, tilDiagonal;
     private TextInputEditText etSideA, etSideB, etSideC, etSideD, etDiagonal;
@@ -59,11 +57,30 @@ public class CalculatorFragment extends Fragment {
     private CalculationMode currentMode = CalculationMode.HERON_IRREGULAR;
     private LandCalculationResult lastResult;
 
+    private final String[] modeOptions = {
+            "4 Irregular Sides + Diagonal (Heron's Formula)",
+            "Equal / Regular 4 Sides (Average Method)"
+    };
+
+    private final String[] standardOptions = {
+            "272.25 Sq Ft (Patwari Standard)",
+            "225 Sq Ft (Punjab / Housing Schemes)",
+            "250 Sq Ft (Custom)"
+    };
+
+    private final String[] unitOptions = {
+            "Feet (ft)",
+            "Gaj / Yards (yd)",
+            "Meters (m)",
+            "Karam (5.5 ft)"
+    };
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_calculator, container, false);
         initViews(view);
+        setupSpinners();
         setupListeners();
         updateHintsAndPreview();
         return view;
@@ -71,11 +88,9 @@ public class CalculatorFragment extends Fragment {
 
     private void initViews(View v) {
         scrollViewCalculator = v.findViewById(R.id.scrollViewCalculator);
-        chipGroupStandard = v.findViewById(R.id.chipGroupStandard);
-        chipGroupUnit = v.findViewById(R.id.chipGroupUnit);
-        rgCalculationMode = v.findViewById(R.id.rgCalculationMode);
-        rbModeEqual = v.findViewById(R.id.rbModeEqual);
-        rbModeHeron = v.findViewById(R.id.rbModeHeron);
+        spinnerCalculationMode = v.findViewById(R.id.spinnerCalculationMode);
+        spinnerMarlaStandard = v.findViewById(R.id.spinnerMarlaStandard);
+        spinnerInputUnit = v.findViewById(R.id.spinnerInputUnit);
 
         tilSideA = v.findViewById(R.id.tilSideA);
         tilSideB = v.findViewById(R.id.tilSideB);
@@ -108,45 +123,93 @@ public class CalculatorFragment extends Fragment {
         btnCopyResult = v.findViewById(R.id.btnCopyResult);
     }
 
+    private void setupSpinners() {
+        if (getContext() == null) return;
+
+        ArrayAdapter<String> modeAdapter = new ArrayAdapter<>(getContext(), R.layout.item_spinner_selected, modeOptions);
+        modeAdapter.setDropDownViewResource(R.layout.item_spinner_dropdown);
+        spinnerCalculationMode.setAdapter(modeAdapter);
+        spinnerCalculationMode.setSelection(0);
+
+        ArrayAdapter<String> standardAdapter = new ArrayAdapter<>(getContext(), R.layout.item_spinner_selected, standardOptions);
+        standardAdapter.setDropDownViewResource(R.layout.item_spinner_dropdown);
+        spinnerMarlaStandard.setAdapter(standardAdapter);
+        spinnerMarlaStandard.setSelection(0); // 272.25 default
+
+        ArrayAdapter<String> unitAdapter = new ArrayAdapter<>(getContext(), R.layout.item_spinner_selected, unitOptions);
+        unitAdapter.setDropDownViewResource(R.layout.item_spinner_dropdown);
+        spinnerInputUnit.setAdapter(unitAdapter);
+        spinnerInputUnit.setSelection(0); // Feet default
+    }
+
     private void setupListeners() {
-        chipGroupStandard.setOnCheckedStateChangeListener((group, checkedIds) -> {
-            if (checkedIds.contains(R.id.chipStd225)) {
-                currentStandard = MarlaStandard.STD_225;
-            } else if (checkedIds.contains(R.id.chipStd272)) {
-                currentStandard = MarlaStandard.STD_272_25;
-            } else if (checkedIds.contains(R.id.chipStd250)) {
-                currentStandard = MarlaStandard.STD_250;
+        spinnerCalculationMode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 0) {
+                    currentMode = CalculationMode.HERON_IRREGULAR;
+                    tilDiagonal.setVisibility(View.VISIBLE);
+                } else {
+                    currentMode = CalculationMode.EQUAL_SIDES;
+                    tilDiagonal.setVisibility(View.GONE);
+                }
+                updateHintsAndPreview();
+                if (lastResult != null) {
+                    performCalculation();
+                }
             }
-            if (lastResult != null) {
-                performCalculation();
-            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
         });
 
-        chipGroupUnit.setOnCheckedStateChangeListener((group, checkedIds) -> {
-            if (checkedIds.contains(R.id.chipUnitFeet)) {
-                currentUnit = InputUnit.FEET;
-            } else if (checkedIds.contains(R.id.chipUnitYards)) {
-                currentUnit = InputUnit.YARDS_GAJ;
-            } else if (checkedIds.contains(R.id.chipUnitMeters)) {
-                currentUnit = InputUnit.METERS;
-            } else if (checkedIds.contains(R.id.chipUnitKaram)) {
-                currentUnit = InputUnit.KARAM;
+        spinnerMarlaStandard.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 1:
+                        currentStandard = MarlaStandard.STD_225;
+                        break;
+                    case 2:
+                        currentStandard = MarlaStandard.STD_250;
+                        break;
+                    case 0:
+                    default:
+                        currentStandard = MarlaStandard.STD_272_25;
+                        break;
+                }
+                if (lastResult != null) {
+                    performCalculation();
+                }
             }
-            updateHintsAndPreview();
-            if (lastResult != null) {
-                performCalculation();
-            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
         });
 
-        rgCalculationMode.setOnCheckedChangeListener((group, checkedId) -> {
-            if (checkedId == R.id.rbModeEqual) {
-                currentMode = CalculationMode.EQUAL_SIDES;
-                tilDiagonal.setVisibility(View.GONE);
-            } else {
-                currentMode = CalculationMode.HERON_IRREGULAR;
-                tilDiagonal.setVisibility(View.VISIBLE);
+        spinnerInputUnit.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 1:
+                        currentUnit = InputUnit.YARDS_GAJ;
+                        break;
+                    case 2:
+                        currentUnit = InputUnit.METERS;
+                        break;
+                    case 3:
+                        currentUnit = InputUnit.KARAM;
+                        break;
+                    case 0:
+                    default:
+                        currentUnit = InputUnit.FEET;
+                        break;
+                }
+                updateHintsAndPreview();
+                if (lastResult != null) {
+                    performCalculation();
+                }
             }
-            updateHintsAndPreview();
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
         });
 
         TextWatcher textWatcher = new TextWatcher() {
@@ -166,15 +229,7 @@ public class CalculatorFragment extends Fragment {
         etSideD.addTextChangedListener(textWatcher);
         etDiagonal.addTextChangedListener(textWatcher);
 
-        // Auto scroll to focused input view so soft keyboard doesn't obscure it
-        setupFocusScroll(etSideA, tilSideA);
-        setupFocusScroll(etSideB, tilSideB);
-        setupFocusScroll(etSideC, tilSideC);
-        setupFocusScroll(etSideD, tilSideD);
-        setupFocusScroll(etDiagonal, tilDiagonal);
-
         btnCalculate.setOnClickListener(v -> performCalculation());
-
         btnClear.setOnClickListener(v -> clearFields());
 
         btnSaveRecord.setOnClickListener(v -> {
@@ -187,25 +242,12 @@ public class CalculatorFragment extends Fragment {
         });
 
         btnShareResult.setOnClickListener(v -> shareCalculatedResult());
-
         btnCopyResult.setOnClickListener(v -> copyCalculatedResult());
-    }
-
-    private void setupFocusScroll(TextInputEditText editText, TextInputLayout til) {
-        editText.setOnFocusChangeListener((v, hasFocus) -> {
-            if (hasFocus && scrollViewCalculator != null) {
-                scrollViewCalculator.postDelayed(() -> {
-                    if (isAdded() && scrollViewCalculator != null) {
-                        scrollViewCalculator.smoothScrollTo(0, til.getTop() - 40);
-                    }
-                }, 250);
-            }
-        });
     }
 
     private void updateHintsAndPreview() {
         String unitShort = " (" + currentUnit.getShortSymbol() + ")";
-        tvLiveUnitBadge.setText("Unit: " + currentUnit.getDisplayName());
+        tvLiveUnitBadge.setText("Unit: " + currentUnit.getShortSymbol());
 
         if (currentMode == CalculationMode.EQUAL_SIDES) {
             tilSideA.setHint("Length 1" + unitShort);

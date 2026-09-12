@@ -15,10 +15,10 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingHorizontal="16dp"
-        android:paddingTop="14dp"
+        android:paddingTop="12dp"
         android:paddingBottom="24dp">
 
-        <!-- 1. Marla Standard Selection Card -->
+        <!-- 1. Compact Configuration Card with Dropdown Spinners -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -33,160 +33,88 @@
                 android:orientation="vertical"
                 android:padding="14dp">
 
+                <!-- Calculation Mode Dropdown -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1. Marla Standard"
+                    android:text="Calculation Method"
                     android:textColor="@color/pak_green_dark"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
-
-                <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/chipGroupStandard"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    app:selectionRequired="true"
-                    app:singleSelection="true">
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipStd272"
-                        style="@style/Widget.Material3.Chip.Filter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="true"
-                        android:text="272.25 Sq Ft (Patwari Standard)"
-                        android:textSize="14sp" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipStd225"
-                        style="@style/Widget.Material3.Chip.Filter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="225 Sq Ft (Punjab / Housing Schemes)"
-                        android:textSize="14sp" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipStd250"
-                        style="@style/Widget.Material3.Chip.Filter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="250 Sq Ft (Custom)"
-                        android:textSize="14sp" />
-                </com.google.android.material.chip.ChipGroup>
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- 2. Calculation Mode & Unit Selection Card -->
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="1dp"
-            app:strokeColor="@color/pak_light_card_border"
-            app:strokeWidth="1.2dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="14dp">
-
-                <!-- Mode Selection -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="2. Calculation Method"
-                    android:textColor="@color/pak_green_dark"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
-
-                <RadioGroup
-                    android:id="@+id/rgCalculationMode"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp">
-
-                    <RadioButton
-                        android:id="@+id/rbModeHeron"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:checked="true"
-                        android:text="4 Irregular Sides + Diagonal (Heron\'s Formula)"
-                        android:textColor="@color/pak_green_primary"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-
-                    <RadioButton
-                        android:id="@+id/rbModeEqual"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Equal / Regular 4 Sides (Average Method)"
-                        android:textColor="@color/pak_text_primary_light"
-                        android:textSize="15sp" />
-                </RadioGroup>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginVertical="10dp"
-                    android:background="@color/pak_light_card_border" />
-
-                <!-- Unit Selection -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Input Unit:"
-                    android:textColor="@color/pak_text_secondary_light"
                     android:textSize="15sp"
                     android:textStyle="bold" />
 
-                <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/chipGroupUnit"
+                <Spinner
+                    android:id="@+id/spinnerCalculationMode"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/bg_spinner_pak"
+                    android:overlapAnchor="false"
+                    android:spinnerMode="dropdown" />
+
+                <!-- 2-Column Row for Marla Standard & Input Unit Spinners -->
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    app:selectionRequired="true"
-                    app:singleSelection="true">
+                    android:layout_marginTop="12dp"
+                    android:orientation="horizontal">
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipUnitFeet"
-                        style="@style/Widget.Material3.Chip.Filter"
-                        android:layout_width="wrap_content"
+                    <!-- Marla Standard Dropdown -->
+                    <LinearLayout
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:checked="true"
-                        android:text="Feet (ft)"
-                        android:textSize="14sp" />
+                        android:layout_marginEnd="6dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipUnitYards"
-                        style="@style/Widget.Material3.Chip.Filter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Gaj / Yards (yd)"
-                        android:textSize="14sp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Marla Standard"
+                            android:textColor="@color/pak_green_dark"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipUnitMeters"
-                        style="@style/Widget.Material3.Chip.Filter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Meters (m)"
-                        android:textSize="14sp" />
+                        <Spinner
+                            android:id="@+id/spinnerMarlaStandard"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:layout_marginTop="6dp"
+                            android:background="@drawable/bg_spinner_pak"
+                            android:overlapAnchor="false"
+                            android:spinnerMode="dropdown" />
+                    </LinearLayout>
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipUnitKaram"
-                        style="@style/Widget.Material3.Chip.Filter"
-                        android:layout_width="wrap_content"
+                    <!-- Input Unit Dropdown -->
+                    <LinearLayout
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="Karam (5.5 ft)"
-                        android:textSize="14sp" />
-                </com.google.android.material.chip.ChipGroup>
+                        android:layout_marginStart="6dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Input Unit"
+                            android:textColor="@color/pak_green_dark"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <Spinner
+                            android:id="@+id/spinnerInputUnit"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:layout_marginTop="6dp"
+                            android:background="@drawable/bg_spinner_pak"
+                            android:overlapAnchor="false"
+                            android:spinnerMode="dropdown" />
+                    </LinearLayout>
+                </LinearLayout>
+
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- 3. Plot Preview Map Card -->
+        <!-- 2. Plot Preview Diagram Card -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -214,7 +142,7 @@
                         android:layout_weight="1"
                         android:text="Plot Diagram Preview"
                         android:textColor="@color/pak_green_dark"
-                        android:textSize="17sp"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -224,7 +152,7 @@
                         android:background="@drawable/bg_stat_card"
                         android:paddingHorizontal="8dp"
                         android:paddingVertical="2dp"
-                        android:text="Unit: Feet"
+                        android:text="Unit: ft"
                         android:textColor="@color/pak_green_primary"
                         android:textSize="12sp"
                         android:textStyle="bold" />
@@ -233,12 +161,12 @@
                 <com.land.measurement.ui.PlotPreviewView
                     android:id="@+id/plotPreview"
                     android:layout_width="match_parent"
-                    android:layout_height="180dp"
-                    android:layout_marginTop="10dp" />
+                    android:layout_height="170dp"
+                    android:layout_marginTop="8dp" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- 4. Dimensions Input Fields Card -->
+        <!-- 3. Dimensions Input Fields Card -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardInputs"
             android:layout_width="match_parent"
@@ -259,16 +187,16 @@
                     android:id="@+id/tvInputSectionTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="3. Enter Plot Side Dimensions"
+                    android:text="Plot Side Dimensions"
                     android:textColor="@color/pak_green_dark"
-                    android:textSize="17sp"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
 
-                <!-- Row 1: Side A (Length 1) & Side B (Width 1) -->
+                <!-- Row 1: Side A & Side B -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="10dp"
                     android:orientation="horizontal">
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -316,7 +244,7 @@
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
-                <!-- Row 2: Side C (Length 2) & Side D (Width 2) -->
+                <!-- Row 2: Side C & Side D -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -380,7 +308,7 @@
                     app:boxCornerRadiusBottomStart="12dp"
                     app:boxCornerRadiusTopEnd="12dp"
                     app:boxCornerRadiusTopStart="12dp"
-                    app:helperText="Required for irregular quadrilateral Heron's calculation"
+                    app:helperText="Required for irregular quadrilateral calculation"
                     app:helperTextTextColor="@color/pak_gold">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -393,7 +321,7 @@
                         android:textStyle="bold" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Action Buttons: Exactly 2 buttons in one row with singleLine -->
+                <!-- Action Buttons: Exactly 2 in a row, singleLine -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -439,7 +367,7 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- 5. Results Card (Revealed after calculation) -->
+        <!-- 4. Results Card (Revealed after calculation) -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardResults"
             android:layout_width="match_parent"

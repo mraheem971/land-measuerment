@@ -27,13 +27,19 @@ import java.util.Locale;
 public class ConverterFragment extends Fragment {
 
     private NestedScrollView scrollViewConverter;
-    private ChipGroup chipGroupConverterStandard;
+    private Spinner spinnerConverterStandard;
     private EditText etConverterValue;
     private Spinner spinnerFromUnit;
 
     private TextView tvConvSqFt, tvConvMarlas, tvConvKanals, tvConvGaj, tvConvSqMeters, tvConvSarsahi, tvConvAcres;
 
     private MarlaStandard currentStandard = MarlaStandard.STD_272_25;
+
+    private final String[] standardOptions = {
+            "272.25 Sq Ft (Patwari Standard)",
+            "225 Sq Ft (Punjab / Housing Schemes)",
+            "250 Sq Ft (Custom)"
+    };
 
     private final String[] unitKeys = {
             "MARLA", "KANAL", "SQ_FEET", "SQ_YARDS", "SQ_METERS", "SARSAHI", "ACRE", "MURABBA"
@@ -55,6 +61,7 @@ public class ConverterFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_converter, container, false);
         initViews(view);
+        setupSpinners();
         setupListeners();
         recalculate();
         return view;
@@ -62,7 +69,7 @@ public class ConverterFragment extends Fragment {
 
     private void initViews(View v) {
         scrollViewConverter = v.findViewById(R.id.scrollViewConverter);
-        chipGroupConverterStandard = v.findViewById(R.id.chipGroupConverterStandard);
+        spinnerConverterStandard = v.findViewById(R.id.spinnerConverterStandard);
         etConverterValue = v.findViewById(R.id.etConverterValue);
         spinnerFromUnit = v.findViewById(R.id.spinnerFromUnit);
 
@@ -73,23 +80,42 @@ public class ConverterFragment extends Fragment {
         tvConvSqMeters = v.findViewById(R.id.tvConvSqMeters);
         tvConvSarsahi = v.findViewById(R.id.tvConvSarsahi);
         tvConvAcres = v.findViewById(R.id.tvConvAcres);
+    }
 
-        if (getContext() != null) {
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, unitDisplay);
-            spinnerFromUnit.setAdapter(adapter);
-        }
+    private void setupSpinners() {
+        if (getContext() == null) return;
+
+        ArrayAdapter<String> standardAdapter = new ArrayAdapter<>(getContext(), R.layout.item_spinner_selected, standardOptions);
+        standardAdapter.setDropDownViewResource(R.layout.item_spinner_dropdown);
+        spinnerConverterStandard.setAdapter(standardAdapter);
+        spinnerConverterStandard.setSelection(0); // 272.25 default
+
+        ArrayAdapter<String> unitAdapter = new ArrayAdapter<>(getContext(), R.layout.item_spinner_selected, unitDisplay);
+        unitAdapter.setDropDownViewResource(R.layout.item_spinner_dropdown);
+        spinnerFromUnit.setAdapter(unitAdapter);
+        spinnerFromUnit.setSelection(0);
     }
 
     private void setupListeners() {
-        chipGroupConverterStandard.setOnCheckedStateChangeListener((group, checkedIds) -> {
-            if (checkedIds.contains(R.id.chipConvStd225)) {
-                currentStandard = MarlaStandard.STD_225;
-            } else if (checkedIds.contains(R.id.chipConvStd272)) {
-                currentStandard = MarlaStandard.STD_272_25;
-            } else if (checkedIds.contains(R.id.chipConvStd250)) {
-                currentStandard = MarlaStandard.STD_250;
+        spinnerConverterStandard.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 1:
+                        currentStandard = MarlaStandard.STD_225;
+                        break;
+                    case 2:
+                        currentStandard = MarlaStandard.STD_250;
+                        break;
+                    case 0:
+                    default:
+                        currentStandard = MarlaStandard.STD_272_25;
+                        break;
+                }
+                recalculate();
             }
-            recalculate();
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
         });
 
         etConverterValue.addTextChangedListener(new TextWatcher() {
@@ -101,16 +127,6 @@ public class ConverterFragment extends Fragment {
             }
             @Override
             public void afterTextChanged(Editable s) {}
-        });
-
-        etConverterValue.setOnFocusChangeListener((v, hasFocus) -> {
-            if (hasFocus && scrollViewConverter != null) {
-                scrollViewConverter.postDelayed(() -> {
-                    if (isAdded() && scrollViewConverter != null) {
-                        scrollViewConverter.smoothScrollTo(0, etConverterValue.getTop() - 40);
-                    }
-                }, 250);
-            }
         });
 
         spinnerFromUnit.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

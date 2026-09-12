@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingHorizontal="16dp"
-        android:paddingTop="14dp"
+        android:paddingTop="12dp"
         android:paddingBottom="24dp">
 
         <!-- Title / Subtitle -->
@@ -39,7 +39,7 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="14dp"
             app:cardCornerRadius="18dp"
             app:cardElevation="2dp"
             app:strokeColor="@color/pak_light_card_border"
@@ -51,89 +51,79 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
-                <!-- Marla standard selector -->
+                <!-- Marla standard selector Dropdown Spinner -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Marla Standard:"
-                    android:textColor="@color/pak_text_secondary_light"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-
-                <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/chipGroupConverterStandard"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    app:selectionRequired="true"
-                    app:singleSelection="true">
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipConvStd272"
-                        style="@style/Widget.Material3.Chip.Filter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="true"
-                        android:text="272.25 Sq Ft (Patwari Standard)"
-                        android:textSize="14sp" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipConvStd225"
-                        style="@style/Widget.Material3.Chip.Filter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="225 Sq Ft (Punjab / Housing Schemes)"
-                        android:textSize="14sp" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipConvStd250"
-                        style="@style/Widget.Material3.Chip.Filter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="250 Sq Ft (Custom)"
-                        android:textSize="14sp" />
-                </com.google.android.material.chip.ChipGroup>
-
-                <!-- Value Input -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tilConverterValue"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:hint="Enter Value"
-                    app:boxStrokeColor="@color/pak_green_primary"
-                    app:boxCornerRadiusBottomEnd="12dp"
-                    app:boxCornerRadiusBottomStart="12dp"
-                    app:boxCornerRadiusTopEnd="12dp"
-                    app:boxCornerRadiusTopStart="12dp">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etConverterValue"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="numberDecimal"
-                        android:text="1"
-                        android:textSize="22sp"
-                        android:textStyle="bold" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <!-- From Unit Spinner / Selector -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
-                    android:text="Convert From Unit:"
-                    android:textColor="@color/pak_text_secondary_light"
+                    android:text="Marla Standard"
+                    android:textColor="@color/pak_green_dark"
                     android:textSize="15sp"
                     android:textStyle="bold" />
 
                 <Spinner
-                    android:id="@+id/spinnerFromUnit"
+                    android:id="@+id/spinnerConverterStandard"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="48dp"
                     android:layout_marginTop="6dp"
-                    android:background="@drawable/bg_stat_card"
-                    android:paddingHorizontal="12dp" />
+                    android:background="@drawable/bg_spinner_pak"
+                    android:overlapAnchor="false"
+                    android:spinnerMode="dropdown" />
+
+                <!-- Value Input & From Unit Side-by-Side in Row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilConverterValue"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="6dp"
+                        android:layout_weight="1"
+                        android:hint="Value"
+                        app:boxStrokeColor="@color/pak_green_primary"
+                        app:boxCornerRadiusBottomEnd="12dp"
+                        app:boxCornerRadiusBottomStart="12dp"
+                        app:boxCornerRadiusTopEnd="12dp"
+                        app:boxCornerRadiusTopStart="12dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etConverterValue"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal"
+                            android:text="1"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:layout_weight="1.3"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="From Unit"
+                            android:textColor="@color/pak_green_dark"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <Spinner
+                            android:id="@+id/spinnerFromUnit"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:layout_marginTop="6dp"
+                            android:background="@drawable/bg_spinner_pak"
+                            android:overlapAnchor="false"
+                            android:spinnerMode="dropdown" />
+                    </LinearLayout>
+                </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
@@ -153,7 +143,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="10dp"
                     android:orientation="vertical">
 
                     <!-- Sq Feet -->
@@ -180,7 +170,7 @@
                             android:textColor="@color/pak_green_primary"
                             android:textSize="17sp"
                             android:textStyle="bold"
-                            tools:text="225.00" />
+                            tools:text="272.25" />
                     </LinearLayout>
 
                     <!-- Marlas -->
@@ -264,7 +254,7 @@
                             android:textColor="@color/pak_green_primary"
                             android:textSize="17sp"
                             android:textStyle="bold"
-                            tools:text="25.00" />
+                            tools:text="30.25" />
                     </LinearLayout>
 
                     <!-- Sq Meters -->
@@ -292,7 +282,7 @@
                             android:textColor="@color/pak_green_primary"
                             android:textSize="17sp"
                             android:textStyle="bold"
-                            tools:text="20.90" />
+                            tools:text="25.29" />
                     </LinearLayout>
 
                     <!-- Sarsahi -->
@@ -348,7 +338,7 @@
                             android:textColor="@color/pak_green_primary"
                             android:textSize="17sp"
                             android:textStyle="bold"
-                            tools:text="0.0063" />
+                            tools:text="0.00625" />
                     </LinearLayout>
                 </LinearLayout>
 
