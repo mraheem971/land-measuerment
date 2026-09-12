@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <!-- Title & Location -->
+        <TextView
+            android:id="@+id/tvDetailTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/pak_green_dark"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            tools:text="Plot # 45, Sector B" />
+
+        <TextView
+            android:id="@+id/tvDetailLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/pak_text_secondary_light"
+            android:textSize="15sp"
+            tools:text="Chak 23, Owner: Malik" />
+
+        <TextView
+            android:id="@+id/tvDetailDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/pak_text_muted_light"
+            android:textSize="13sp"
+            tools:text="Saved on: 12 May 2026, 04:30 PM" />
+
+        <!-- Standards & Modes Badges -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvDetailMode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_stat_card"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp"
+                android:textColor="@color/pak_green_primary"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                tools:text="Heron's Formula" />
+
+            <TextView
+                android:id="@+id/tvDetailStandard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_tag_gold"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp"
+                android:textColor="@color/pak_gold"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                tools:text="225 Sq Ft Marla" />
+        </LinearLayout>
+
+        <!-- Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="16dp"
+            android:background="@color/pak_light_card_border" />
+
+        <!-- Side Dimensions -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Plot Dimensions:"
+            android:textColor="@color/pak_green_dark"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_stat_card"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/tvDetailSides"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="4dp"
+                android:textColor="@color/pak_text_primary_light"
+                android:textSize="15sp"
+                tools:text="• Side A: 40 ft\n• Side B: 60 ft\n• Side C: 40 ft\n• Side D: 60 ft\n• Diagonal: 72.1 ft" />
+        </LinearLayout>
+
+        <!-- Total Area & Pakistani Breakdown -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Calculated Area:"
+            android:textColor="@color/pak_green_dark"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_stat_card"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/tvDetailSqFt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/pak_green_primary"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:text="2,400 Square Feet" />
+
+            <TextView
+                android:id="@+id/tvDetailBreakdown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textColor="@color/pak_gold"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                tools:text="10 Marlas, 150 Sq Ft" />
+
+            <TextView
+                android:id="@+id/tvDetailConversions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:lineSpacingExtra="3dp"
+                android:textColor="@color/pak_text_secondary_light"
+                android:textSize="14sp"
+                tools:text="• 266.67 Sq Yards / Gaj\n• 222.97 Sq Meters\n• 0.53 Kanals" />
+        </LinearLayout>
+
+        <!-- Actions -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="end"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDetailClose"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="Close"
+                android:textColor="@color/pak_text_secondary_light"
+                android:textSize="15sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDetailShare"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="@color/pak_green_primary"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="Share Record"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                app:cornerRadius="12dp"
+                app:icon="@drawable/ic_share" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pakistani Land Measurement Guide"
+            android:textColor="@color/pak_green_dark"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="Reference standards and geometric calculation formulas"
+            android:textColor="@color/pak_text_secondary_light"
+            android:textSize="14sp" />
+
+        <!-- Card 1: Marla Standards -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="14dp"
+            app:strokeColor="@color/pak_light_card_border"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_stat_card"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1. Marla Standards"
+                    android:textColor="@color/pak_green_dark"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:lineSpacingExtra="4dp"
+                    android:textColor="@color/pak_text_primary_light"
+                    android:textSize="14sp"
+                    android:text="• Standard (Punjab / Housing Schemes / LDA / DHA): 1 Marla = 225 Sq Ft (25 Sq Yards)\n• Govt Revenue / Patwari Record: 1 Marla = 272.25 Sq Ft (30.25 Sq Yards / 16 Karam²)\n• Custom / Commercial: 1 Marla = 250 Sq Ft" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Card 2: Units Hierarchy -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:cardCornerRadius="14dp"
+            app:strokeColor="@color/pak_light_card_border"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_stat_card"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2. Land Unit Hierarchy"
+                    android:textColor="@color/pak_green_dark"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:lineSpacingExtra="4dp"
+                    android:textColor="@color/pak_text_primary_light"
+                    android:textSize="14sp"
+                    android:text="• 1 Karam = 5.5 Feet (66 Inches)\n• 1 Sarsahi = 1 Karam × 1 Karam = 30.25 Sq Ft (in 272.25 Marla) or 25 Sq Ft (in 225 Marla)\n• 1 Marla = 9 Sarsahi\n• 1 Kanal = 20 Marlas (4,500 / 5,445 Sq Ft)\n• 1 Bigha = 4 Kanals (80 Marlas)\n• 1 Acre / Qila = 8 Kanals (160 Marlas)\n• 1 Murabba = 25 Acres (200 Kanals)" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Card 3: Heron's Formula Guide -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:cardCornerRadius="14dp"
+            app:strokeColor="@color/pak_light_card_border"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_stat_card"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="3. Irregular 4 Sides &amp; Heron's Formula"
+                    android:textColor="@color/pak_gold"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:lineSpacingExtra="4dp"
+                    android:textColor="@color/pak_text_primary_light"
+                    android:textSize="14sp"
+                    android:text="When a plot does not have exact 90-degree right angles or its 4 sides are uneven, the traditional average method gives incorrect results.\nThe mathematically exact method divides the quadrilateral plot into 2 triangles using a diagonal measurement between opposite corners, computing the precise area via Heron's Formula:\n\nArea = √[s(s-a)(s-b)(s-c)] where s = (a+b+c)/2" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnGuideClose"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/pak_green_primary"
+            android:text="Got It"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:cornerRadius="12dp" />
+
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Pak Land Measure</string>
+    <string name="tagline">Pakistani Land Measurement &amp; Unit Converter</string>
+
+    <!-- Navigation Tabs -->
+    <string name="tab_calculator">Calculator</string>
+    <string name="tab_converter">Converter</string>
+    <string name="tab_history">Saved Records</string>
+    <string name="tab_info">Land Guide</string>
+
+    <!-- Standards & Units -->
+    <string name="marla_standard_label">Marla Standard</string>
+    <string name="marla_std_225">225 Sq Ft (Punjab / Housing Schemes)</string>
+    <string name="marla_std_272">272.25 Sq Ft (Govt Revenue / Patwari)</string>
+    <string name="marla_std_250">250 Sq Ft (Custom / Commercial)</string>
+
+    <string name="input_unit_label">Input Unit</string>
+    <string name="unit_feet">Feet (ft)</string>
+    <string name="unit_yards">Gaj / Yards (yd)</string>
+    <string name="unit_meters">Meters (m)</string>
+    <string name="unit_karam">Karam (5.5 ft)</string>
+
+    <!-- Modes -->
+    <string name="mode_equal">Equal / Regular 4 Sides</string>
+    <string name="mode_heron">4 Irregular Sides + Diagonal (Heron\'s Formula)</string>
+    <string name="mode_equal_desc">For rectangular plots or calculating by average side lengths.</string>
+    <string name="mode_heron_desc">For irregular four-corner plots using Heron\'s formula and diagonal.</string>
+
+    <!-- Side Labels -->
+    <string name="side_a">Side A (North / Length 1)</string>
+    <string name="side_b">Side B (East / Width 1)</string>
+    <string name="side_c">Side C (South / Length 2)</string>
+    <string name="side_d">Side D (West / Width 2)</string>
+    <string name="side_diagonal">Diagonal (Corner to Corner)</string>
+
+    <string name="length_1">Length 1</string>
+    <string name="length_2">Length 2</string>
+    <string name="width_1">Width 1</string>
+    <string name="width_2">Width 2</string>
+
+    <!-- Actions -->
+    <string name="btn_calculate">Calculate Area</string>
+    <string name="btn_clear">Clear</string>
+    <string name="btn_save">Save Record</string>
+    <string name="btn_share">Share</string>
+    <string name="btn_copy">Copy</string>
+    <string name="btn_delete">Delete</string>
+    <string name="btn_close">Close</string>
+
+    <!-- Results -->
+    <string name="results_title">Calculation Result</string>
+    <string name="total_area_sqft">Total Square Feet</string>
+    <string name="total_area_sqyard">Total Square Yards / Gaj</string>
+    <string name="total_area_sqmeter">Total Square Meters</string>
+    <string name="pak_breakdown">Pakistani Land Breakdown</string>
+    <string name="marla_val">Marlas</string>
+    <string name="kanal_val">Kanals</string>
+    <string name="acre_val">Acre / Qila</string>
+    <string name="sarsahi_val">Sarsahi</string>
+
+    <!-- Save Dialog -->
+    <string name="dialog_save_title">Save Measurement Record</string>
+    <string name="hint_record_title">Plot Title (e.g. Plot # 45, Sector B)</string>
+    <string name="hint_record_location">Location / Owner / Khasra No. (Optional)</string>
+    <string name="record_saved_success">Measurement saved successfully!</string>
+    <string name="no_records_found">No saved records found.\nCalculate a plot and tap Save!</string>
+    <string name="search_records_hint">Search by title or location...</string>
+
+    <!-- Error Messages -->
+    <string name="err_empty_fields">Please enter all required side measurements.</string>
+    <string name="err_invalid_number">Please enter valid positive numbers.</string>
+    <string name="err_invalid_triangle">Invalid plot geometry! The diagonal (%1$s) cannot form valid triangles with the given sides. Please verify measurements.</string>
+</resources>

@@ -1,0 +1,29 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.LandMeasurement" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Brand & Colors -->
+        <item name="colorPrimary">@color/pak_green_primary</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryContainer">@color/pak_green_light</item>
+        <item name="colorOnPrimaryContainer">@color/pak_green_dark</item>
+        <item name="colorSecondary">@color/pak_gold</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorSecondaryContainer">@color/pak_gold_light</item>
+        <item name="colorOnSecondaryContainer">@color/pak_gold</item>
+        <item name="colorTertiary">@color/pak_green_accent</item>
+        <item name="colorError">@color/pak_error</item>
+        <item name="android:colorBackground">@color/pak_light_bg</item>
+        <item name="colorSurface">@color/pak_light_surface</item>
+        <item name="colorSurfaceVariant">@color/pak_light_surface_variant</item>
+        <item name="colorOnSurface">@color/pak_text_primary_light</item>
+        <item name="colorOnSurfaceVariant">@color/pak_text_secondary_light</item>
+        
+        <!-- Status Bar and Navigation Bar -->
+        <item name="android:statusBarColor">@color/pak_green_dark</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="android:navigationBarColor">@color/pak_light_surface</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+    </style>
+
+    <style name="Theme.LandMeasurement" parent="Base.Theme.LandMeasurement" />
+</resources>

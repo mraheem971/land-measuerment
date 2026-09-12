@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Pakistan Theme Core Colors -->
+    <color name="pak_green_dark">#013214</color>
+    <color name="pak_green_primary">#0B6623</color>
+    <color name="pak_green_primary_variant">#004D1A</color>
+    <color name="pak_green_accent">#10B981</color>
+    <color name="pak_green_light">#E8F5E9</color>
+    <color name="pak_green_subtle">#DCFCE7</color>
+    
+    <!-- Gold / Crescent Accents -->
+    <color name="pak_gold">#D97706</color>
+    <color name="pak_gold_light">#FEF3C7</color>
+    <color name="pak_gold_accent">#F59E0B</color>
+
+    <!-- Neutral Colors -->
+    <color name="white">#FFFFFFFF</color>
+    <color name="black">#FF000000</color>
+    <color name="pak_error">#DC2626</color>
+    <color name="pak_error_light">#FEE2E2</color>
+    <color name="pak_success">#059669</color>
+
+    <!-- Light Theme Backgrounds & Surfaces -->
+    <color name="pak_light_bg">#F3F7F4</color>
+    <color name="pak_light_surface">#FFFFFF</color>
+    <color name="pak_light_surface_variant">#EAF2EC</color>
+    <color name="pak_light_card_border">#D1E7D8</color>
+    <color name="pak_text_primary_light">#0F172A</color>
+    <color name="pak_text_secondary_light">#475569</color>
+    <color name="pak_text_muted_light">#64748B</color>
+
+    <!-- Dark Theme Backgrounds & Surfaces -->
+    <color name="pak_dark_bg">#0A120E</color>
+    <color name="pak_dark_surface">#122018</color>
+    <color name="pak_dark_surface_variant">#1A2E23</color>
+    <color name="pak_dark_card_border">#244232</color>
+    <color name="pak_text_primary_dark">#F8FAFC</color>
+    <color name="pak_text_secondary_dark">#CBD5E1</color>
+    <color name="pak_text_muted_dark">#94A3B8</color>
+</resources>

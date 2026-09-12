@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="8dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="2dp"
+    app:strokeColor="@color/pak_light_card_border"
+    app:strokeWidth="1.5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Top Row: Title & Date -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvRecordTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/pak_green_dark"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                tools:text="Plot # 45, Sector B" />
+
+            <TextView
+                android:id="@+id/tvRecordDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/pak_text_muted_light"
+                android:textSize="13sp"
+                tools:text="12 May 2026" />
+        </LinearLayout>
+
+        <!-- Location / Owner -->
+        <TextView
+            android:id="@+id/tvRecordLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/pak_text_secondary_light"
+            android:textSize="15sp"
+            tools:text="Mouza Chak 12, Malik Zafar" />
+
+        <!-- Badges: Mode & Marla standard -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvModeBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_stat_card"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp"
+                android:textColor="@color/pak_green_primary"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                tools:text="Heron's Formula" />
+
+            <TextView
+                android:id="@+id/tvStandardBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_tag_gold"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp"
+                android:textColor="@color/pak_gold"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                tools:text="272.25 Sq Ft Marla" />
+        </LinearLayout>
+
+        <!-- Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="12dp"
+            android:background="@color/pak_light_card_border" />
+
+        <!-- Area Metrics -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total Area"
+                    android:textColor="@color/pak_text_muted_light"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tvRecordSqFt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/pak_green_primary"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    tools:text="2,400 Sq Ft" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pak Breakdown"
+                    android:textColor="@color/pak_text_muted_light"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tvRecordBreakdown"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/pak_gold"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    tools:text="8 Marlas, 2 Sarsahi" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Actions Row: Exactly 2 Buttons in Row with Single Line -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="end|center_vertical"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnShareRecord"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="Share"
+                android:textColor="@color/pak_green_primary"
+                android:textSize="14sp"
+                app:icon="@drawable/ic_share"
+                app:iconTint="@color/pak_green_primary" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDeleteRecord"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="Delete"
+                android:textColor="@color/pak_error"
+                android:textSize="14sp"
+                app:icon="@drawable/ic_delete"
+                app:iconTint="@color/pak_error" />
+        </LinearLayout>
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
