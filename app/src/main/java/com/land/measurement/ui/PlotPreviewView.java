@@ -113,8 +113,16 @@ public class PlotPreviewView extends View {
         int h = getHeight();
         if (w <= 0 || h <= 0) return;
 
-        float padX = w * 0.16f;
-        float padY = h * 0.18f;
+        float density = getResources().getDisplayMetrics().density;
+        float scale = Math.max(0.65f, Math.min(1.2f, h / (170f * density)));
+
+        textPaint.setTextSize(12.5f * density * scale);
+        cornerTextPaint.setTextSize(10f * density * scale);
+        borderPaint.setStrokeWidth(Math.max(3f, 5f * scale));
+        diagonalPaint.setStrokeWidth(Math.max(2.5f, 4f * scale));
+
+        float padX = Math.max(28f * density * scale, w * 0.16f);
+        float padY = Math.max(22f * density * scale, h * 0.19f);
         float plotW = w - 2 * padX;
         float plotH = h - 2 * padY;
 
@@ -141,56 +149,57 @@ public class PlotPreviewView extends View {
             float diagMidX = (p0.x + p2.x) / 2f;
             float diagMidY = (p0.y + p2.y) / 2f;
             String diagStr = String.format(Locale.US, "Diag: %.1f %s", diagonal, unitText);
-            drawBadgeText(canvas, diagStr, diagMidX, diagMidY, true);
+            drawBadgeText(canvas, diagStr, diagMidX, diagMidY, true, scale, density);
         }
 
         // Draw Corner Dots & Letters
-        drawCorner(canvas, p0, "A");
-        drawCorner(canvas, p1, "B");
-        drawCorner(canvas, p2, "C");
-        drawCorner(canvas, p3, "D");
+        drawCorner(canvas, p0, "A", scale, density);
+        drawCorner(canvas, p1, "B", scale, density);
+        drawCorner(canvas, p2, "C", scale, density);
+        drawCorner(canvas, p3, "D", scale, density);
 
         // Side A (Top)
         String labelA = String.format(Locale.US, "A: %.1f %s", sideA, unitText);
-        drawBadgeText(canvas, labelA, (p0.x + p1.x) / 2f, (p0.y + p1.y) / 2f - 24f, false);
+        drawBadgeText(canvas, labelA, (p0.x + p1.x) / 2f, (p0.y + p1.y) / 2f - 12f * density * scale, false, scale, density);
 
         // Side B (Right)
         String labelB = String.format(Locale.US, "B: %.1f %s", sideB, unitText);
-        drawBadgeText(canvas, labelB, (p1.x + p2.x) / 2f + 32f, (p1.y + p2.y) / 2f, false);
+        drawBadgeText(canvas, labelB, (p1.x + p2.x) / 2f + 16f * density * scale, (p1.y + p2.y) / 2f, false, scale, density);
 
         // Side C (Bottom)
         String labelC = String.format(Locale.US, "C: %.1f %s", sideC, unitText);
-        drawBadgeText(canvas, labelC, (p3.x + p2.x) / 2f, (p3.y + p2.y) / 2f + 36f, false);
+        drawBadgeText(canvas, labelC, (p3.x + p2.x) / 2f, (p3.y + p2.y) / 2f + 16f * density * scale, false, scale, density);
 
         // Side D (Left)
         String labelD = String.format(Locale.US, "D: %.1f %s", sideD, unitText);
-        drawBadgeText(canvas, labelD, (p0.x + p3.x) / 2f - 32f, (p0.y + p3.y) / 2f, false);
+        drawBadgeText(canvas, labelD, (p0.x + p3.x) / 2f - 16f * density * scale, (p0.y + p3.y) / 2f, false, scale, density);
     }
 
-    private void drawCorner(Canvas canvas, PointF pt, String label) {
-        float radius = 22f;
+    private void drawCorner(Canvas canvas, PointF pt, String label, float scale, float density) {
+        float radius = 9f * density * scale;
         canvas.drawCircle(pt.x, pt.y, radius, cornerPaint);
         float textOffset = (cornerTextPaint.descent() + cornerTextPaint.ascent()) / 2f;
         canvas.drawText(label, pt.x, pt.y - textOffset, cornerTextPaint);
     }
 
-    private void drawBadgeText(Canvas canvas, String text, float cx, float cy, boolean isGold) {
+    private void drawBadgeText(Canvas canvas, String text, float cx, float cy, boolean isGold, float scale, float density) {
         float textWidth = textPaint.measureText(text);
-        float padH = 18f;
-        float padV = 10f;
-        RectF rect = new RectF(cx - textWidth / 2f - padH, cy - 24f - padV, cx + textWidth / 2f + padH, cy + 12f + padV);
+        float padH = 6f * density * scale;
+        float padV = 3.5f * density * scale;
+        float textHeight = textPaint.getTextSize();
+        RectF rect = new RectF(cx - textWidth / 2f - padH, cy - textHeight * 0.85f - padV, cx + textWidth / 2f + padH, cy + textHeight * 0.35f + padV);
 
         Paint bgPaint = new Paint(labelBgPaint);
         if (isGold) {
             bgPaint.setColor(Color.argb(245, 254, 243, 199));
         }
-        canvas.drawRoundRect(rect, 12f, 12f, bgPaint);
+        canvas.drawRoundRect(rect, 8f * scale, 8f * scale, bgPaint);
 
         Paint stroke = new Paint(Paint.ANTI_ALIAS_FLAG);
         stroke.setStyle(Paint.Style.STROKE);
-        stroke.setStrokeWidth(2f);
+        stroke.setStrokeWidth(1.5f * scale);
         stroke.setColor(isGold ? ContextCompat.getColor(getContext(), R.color.pak_gold) : ContextCompat.getColor(getContext(), R.color.pak_light_card_border));
-        canvas.drawRoundRect(rect, 12f, 12f, stroke);
+        canvas.drawRoundRect(rect, 8f * scale, 8f * scale, stroke);
 
         Paint tPaint = new Paint(textPaint);
         if (isGold) {

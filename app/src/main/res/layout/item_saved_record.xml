@@ -9,51 +9,96 @@
     app:cardCornerRadius="16dp"
     app:cardElevation="2dp"
     app:strokeColor="@color/pak_light_card_border"
-    app:strokeWidth="1.5dp">
+    app:strokeWidth="1.2dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="14dp">
 
-        <!-- Top Row: Title & Date -->
+        <!-- Top Header: Title and Date & Time -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
+            android:gravity="top"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tvRecordTitle"
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="@color/pak_green_dark"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                tools:text="Plot # 45, Sector B" />
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvRecordDate"
+                <TextView
+                    android:id="@+id/tvRecordTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:textColor="@color/pak_green_dark"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    tools:text="Plot # 45, Sector B" />
+
+                <!-- Location / Owner Row with Icon -->
+                <LinearLayout
+                    android:id="@+id/layoutLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:src="@drawable/ic_location"
+                        app:tint="@color/pak_green_primary" />
+
+                    <TextView
+                        android:id="@+id/tvRecordLocation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textColor="@color/pak_text_secondary_light"
+                        android:textSize="13sp"
+                        tools:text="Mouza Chak 12, Malik Zafar" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Date & Time Badge -->
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/pak_text_muted_light"
-                android:textSize="13sp"
-                tools:text="12 May 2026" />
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_stat_card"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="4dp">
+
+                <ImageView
+                    android:layout_width="13dp"
+                    android:layout_height="13dp"
+                    android:src="@drawable/ic_calendar"
+                    app:tint="@color/pak_green_primary" />
+
+                <TextView
+                    android:id="@+id/tvRecordDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:textColor="@color/pak_text_secondary_light"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    tools:text="12 Sep 2026, 07:01 PM" />
+            </LinearLayout>
         </LinearLayout>
 
-        <!-- Location / Owner -->
-        <TextView
-            android:id="@+id/tvRecordLocation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:textColor="@color/pak_text_secondary_light"
-            android:textSize="15sp"
-            tools:text="Mouza Chak 12, Malik Zafar" />
-
-        <!-- Badges: Mode & Marla standard -->
+        <!-- Method & Standard Badges Row -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -66,38 +111,69 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_stat_card"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="4dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="3dp"
                 android:textColor="@color/pak_green_primary"
-                android:textSize="13sp"
+                android:textSize="11.5sp"
                 android:textStyle="bold"
-                tools:text="Heron's Formula" />
+                tools:text="Heron's Formula (Irregular)" />
 
             <TextView
                 android:id="@+id/tvStandardBadge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="6dp"
                 android:background="@drawable/bg_tag_gold"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="4dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="3dp"
                 android:textColor="@color/pak_gold"
-                android:textSize="13sp"
+                android:textSize="11.5sp"
                 android:textStyle="bold"
                 tools:text="272.25 Sq Ft Marla" />
         </LinearLayout>
 
-        <!-- Divider -->
-        <View
+        <!-- Plot Shape Preview Canvas -->
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginVertical="12dp"
-            android:background="@color/pak_light_card_border" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:cardBackgroundColor="@color/pak_light_surface_variant"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/pak_light_card_border"
+            app:strokeWidth="1dp">
+
+            <com.land.measurement.ui.PlotPreviewView
+                android:id="@+id/plotPreviewRecord"
+                android:layout_width="match_parent"
+                android:layout_height="145dp"
+                android:padding="6dp" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Side Measurements Summary -->
+        <TextView
+            android:id="@+id/tvRecordMeasurements"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_stat_card"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="5dp"
+            android:textColor="@color/pak_text_primary_light"
+            android:textSize="12.5sp"
+            tools:text="Sides: A: 40 ft | B: 60 ft | C: 40 ft | D: 60 ft | Diag: 72.1 ft" />
 
         <!-- Area Metrics -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:baselineAligned="false"
             android:orientation="horizontal">
 
@@ -112,21 +188,31 @@
                     android:layout_height="wrap_content"
                     android:text="Total Area"
                     android:textColor="@color/pak_text_muted_light"
-                    android:textSize="13sp" />
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/tvRecordSqFt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/pak_green_primary"
-                    android:textSize="18sp"
+                    android:textSize="17sp"
                     android:textStyle="bold"
-                    tools:text="2,400 Sq Ft" />
+                    tools:text="5,635.4 Sq Ft" />
+
+                <TextView
+                    android:id="@+id/tvRecordMarlasKanals"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/pak_green_dark"
+                    android:textSize="12.5sp"
+                    android:textStyle="bold"
+                    tools:text="20.70 Marlas (1.03 Kanals)" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:layout_weight="1.2"
                 android:orientation="vertical">
 
@@ -135,24 +221,31 @@
                     android:layout_height="wrap_content"
                     android:text="Pak Breakdown"
                     android:textColor="@color/pak_text_muted_light"
-                    android:textSize="13sp" />
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/tvRecordBreakdown"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/pak_gold"
-                    android:textSize="17sp"
+                    android:textSize="14sp"
                     android:textStyle="bold"
-                    tools:text="8 Marlas, 2 Sarsahi" />
+                    tools:text="1 Kanal, 0 Marlas, 6 Sarsahi, 8.9 Sq Ft" />
             </LinearLayout>
         </LinearLayout>
+
+        <!-- Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/pak_light_card_border" />
 
         <!-- Actions Row: Exactly 2 Buttons in Row with Single Line -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="4dp"
             android:gravity="end|center_vertical"
             android:orientation="horizontal">
 
@@ -166,8 +259,9 @@
                 android:singleLine="true"
                 android:text="Share"
                 android:textColor="@color/pak_green_primary"
-                android:textSize="14sp"
+                android:textSize="13.5sp"
                 app:icon="@drawable/ic_share"
+                app:iconSize="16dp"
                 app:iconTint="@color/pak_green_primary" />
 
             <com.google.android.material.button.MaterialButton
@@ -175,14 +269,15 @@
                 style="@style/Widget.Material3.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="4dp"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:singleLine="true"
                 android:text="Delete"
                 android:textColor="@color/pak_error"
-                android:textSize="14sp"
+                android:textSize="13.5sp"
                 app:icon="@drawable/ic_delete"
+                app:iconSize="16dp"
                 app:iconTint="@color/pak_error" />
         </LinearLayout>
 

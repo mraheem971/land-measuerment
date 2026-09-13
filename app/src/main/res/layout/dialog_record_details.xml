@@ -72,17 +72,29 @@
                 tools:text="225 Sq Ft Marla" />
         </LinearLayout>
 
-        <!-- Divider -->
-        <View
+        <!-- Plot Shape Preview Canvas -->
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginVertical="16dp"
-            android:background="@color/pak_light_card_border" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:cardBackgroundColor="@color/pak_light_surface_variant"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/pak_light_card_border"
+            app:strokeWidth="1dp">
+
+            <com.land.measurement.ui.PlotPreviewView
+                android:id="@+id/plotPreviewDetail"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:padding="6dp" />
+        </com.google.android.material.card.MaterialCardView>
 
         <!-- Side Dimensions -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
             android:text="Plot Dimensions:"
             android:textColor="@color/pak_green_dark"
             android:textSize="16sp"

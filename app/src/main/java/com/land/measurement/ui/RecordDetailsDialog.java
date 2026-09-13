@@ -43,6 +43,7 @@ public class RecordDetailsDialog extends Dialog {
         TextView tvDate = findViewById(R.id.tvDetailDate);
         TextView tvMode = findViewById(R.id.tvDetailMode);
         TextView tvStandard = findViewById(R.id.tvDetailStandard);
+        PlotPreviewView plotPreview = findViewById(R.id.plotPreviewDetail);
         TextView tvSides = findViewById(R.id.tvDetailSides);
         TextView tvSqFt = findViewById(R.id.tvDetailSqFt);
         TextView tvBreakdown = findViewById(R.id.tvDetailBreakdown);
@@ -55,6 +56,34 @@ public class RecordDetailsDialog extends Dialog {
         tvDate.setText("Saved on: " + dateFormat.format(new Date(record.getTimestamp())));
         tvMode.setText(record.getCalculationMode());
         tvStandard.setText(record.getMarlaStandard());
+
+        String unitSymbol = "ft";
+        if (record.getInputUnit() != null) {
+            String u = record.getInputUnit().toLowerCase();
+            if (u.contains("yd") || u.contains("gaj") || u.contains("yard")) {
+                unitSymbol = "yd";
+            } else if (u.contains("meter") || u.contains("m")) {
+                unitSymbol = "m";
+            } else if (u.contains("karam")) {
+                unitSymbol = "karam";
+            }
+        }
+
+        com.land.measurement.model.CalculationMode calcMode = (record.getCalculationMode() != null && record.getCalculationMode().toLowerCase().contains("heron"))
+                ? com.land.measurement.model.CalculationMode.HERON_IRREGULAR
+                : com.land.measurement.model.CalculationMode.EQUAL_SIDES;
+
+        if (plotPreview != null) {
+            plotPreview.updateDimensions(
+                    record.getSideA(),
+                    record.getSideB(),
+                    record.getSideC(),
+                    record.getSideD(),
+                    record.getDiagonal(),
+                    unitSymbol,
+                    calcMode
+            );
+        }
 
         String unit = record.getInputUnit() != null ? record.getInputUnit() : "ft";
         StringBuilder sidesText = new StringBuilder();
